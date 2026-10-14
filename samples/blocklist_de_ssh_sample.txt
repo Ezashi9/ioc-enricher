@@ -1,0 +1,11 @@
+# 10 random IPs from https://lists.blocklist.de/lists/ssh.txt (IPs reported for SSH attacks in the last 48h), fetched 2026-10-14
+95.78.42.64
+5.187.97.40
+218.98.97.7
+161.132.38.233
+95.220.213.196
+95.46.8.204
+176.99.134.236
+95.255.158.96
+118.193.44.104
+101.126.153.162
