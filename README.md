@@ -87,7 +87,7 @@ sample-report/  both example reports
 ## Next steps in Home SOC
 
 - **Honeypot:** a decoy SSH server on a throwaway cloud VM, so the pipeline runs on attacks happening now. Those attackers' intelligence will be fresh, unlike the historical logs above.
-- **Dashboard:** a web view combining Log Hunter and IOC Enricher results.
+- **[Dashboard](https://github.com/Ezashi9/home-soc-dashboard)** (done, [live demo](https://ezashi9.github.io/home-soc-dashboard/)): a web view combining Log Hunter and IOC Enricher results.
 
 ## Ethics and legal
 
