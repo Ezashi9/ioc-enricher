@@ -53,10 +53,13 @@ def _from_log_hunter(doc: dict) -> list[Indicator]:
     for alert in doc["alerts"]:
         if alert["severity"] == "info":
             continue
-        ind = by_ip.setdefault(alert["ip"], Indicator(alert["ip"]))
-        ind.log_hunter_rules.append(alert["rule"])
-        if alert["rule"] == "brute_force":
-            ind.failed_logins = alert["count"]
+        # Distributed alerts name many attackers in "sources" instead of one "ip".
+        for ip in alert.get("sources") or [alert["ip"]]:
+            ind = by_ip.setdefault(ip, Indicator(ip))
+            if alert["rule"] not in ind.log_hunter_rules:
+                ind.log_hunter_rules.append(alert["rule"])
+            if alert["rule"] == "brute_force":
+                ind.failed_logins = alert["count"]
     for ip, ind in by_ip.items():
         ind.failed_logins = ind.failed_logins or failed.get(ip, 0)
     return [_screen(i) for i in sorted(by_ip.values(), key=lambda i: -i.failed_logins)]

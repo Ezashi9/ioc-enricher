@@ -81,6 +81,18 @@ class EnrichTests(unittest.TestCase):
         self.assertEqual(inds[0].failed_logins, 50)
         self.assertEqual(inds[1].failed_logins, 20)
 
+    def test_distributed_alert_expands_to_each_source(self):
+        doc = {
+            "summary": {"top_attacking_ips": []},
+            "alerts": [{"rule": "distributed_brute_force", "severity": "medium", "ip": "multiple",
+                        "count": 2, "sources": ["192.0.2.1", "192.0.2.2"]}],
+        }
+        path = self.tmp / "dist.json"
+        path.write_text(json.dumps(doc))
+        inds = load_indicators(str(path))
+        self.assertEqual(sorted(i.ip for i in inds), ["192.0.2.1", "192.0.2.2"])
+        self.assertTrue(all(i.log_hunter_rules == ["distributed_brute_force"] for i in inds))
+
     def test_load_env(self):
         path = self.tmp / ".env"
         path.write_text('# comment\nABUSEIPDB_API_KEY="abc123"\n')
