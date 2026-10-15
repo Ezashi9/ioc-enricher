@@ -1,5 +1,7 @@
 # IOC Enricher
 
+[![Tests](https://github.com/Ezashi9/ioc-enricher/actions/workflows/ci.yml/badge.svg)](https://github.com/Ezashi9/ioc-enricher/actions/workflows/ci.yml)
+
 Checks IP addresses against the [AbuseIPDB](https://www.abuseipdb.com) threat-intelligence database and gives each one a verdict: **malicious, suspicious, low or no reports**. It also adds the country, network owner and how many people have reported the address.
 
 It's the second part of **Home SOC**, a small security operations centre I'm building piece by piece. It reads the alerts from [Log Hunter](https://github.com/Ezashi9/log-hunter) directly, so each attacker IP keeps its context, e.g. "brute force, 286 failed logins".
